@@ -55,7 +55,7 @@ def bett(point, bet):
 
 ########    Vvod otveta    ########
 
-def answerr(answer):
+def answerr(name, answer):
     answer=checking(answer)
     while(type(answer)!=int or answer<2 or answer>12):
             if(type(answer)!=int):
@@ -87,14 +87,14 @@ def game_one(point, name):
         point-=bet
         
       #otvet i ego proverka vmeste s vyhodom
-        answer = answerr(input('Enter your guess '))
+        answer = answerr(name, input('Enter your guess '))
         if (answer == 0):
             print('\n'+name+', you left the game. Your points are ', point)
             stop = restart(input('Do you want to start again?(Yes/No) '))
             if(stop == 1): return 1
             else: return 0
       #sravnenie                
-        print('\n',dice_one,'...',dice_two,'    Outcome:',outcome, name+'\'s answer:',answer)
+        print('\n',dice_one,'...',dice_two, '   Outcome:',outcome, '    '+ name+'\'s answer:',answer)
         if (answer == outcome):
             print('Congratulations, ',name,'! You win. +',bet,' points.\n')
             point += bet
@@ -118,7 +118,7 @@ def game_two(point_one, point_two, name_one, name_two):
         dice_two = randrange(1,7)   # 2 kost'
         outcome = dice_one+dice_two # rezul'tat kostej
 
-        print('\n'+name_one+'\'s turn.\n')       
+        print('\n'+name_one+'\'s turn:')       
       #Stavka pervogo i ee proverka vmeste s vyhodom
         bet1=bett(point_one, input('Enter your bet '))
         if(bet1==0):
@@ -127,15 +127,16 @@ def game_two(point_one, point_two, name_one, name_two):
             if(stop == 1): return 1
             else: return 0
         point_one-=bet1
+        
       #otvet pervogo i ego proverka vmeste s vyhodom
-        answer1 = answerr(input('Enter your guess '))
+        answer1 = answerr(name_one,input('Enter your guess '))
         if (answer1 == 0):
             print('\n'+name_one+', you left the game. Your points are ', point_one, name_two+' points are', point_two)
             stop = restart(input('Do you want to start again?(Yes/No) '))
             if(stop == 1): return 1
             else: return 0
 
-        print('\n'+name_two+'\'s turn.\n')    
+        print('\n'+name_two+'\'s turn:')    
       #Stavka vtorogo i ee proverka vmeste s vyhodom
         bet2=bett(point_two,input('Enter your bet '))
         if(bet2==0):
@@ -146,8 +147,8 @@ def game_two(point_one, point_two, name_one, name_two):
         point_two-=bet2
         
       #otvet vtorogo i ego proverka vmeste s vyhodom
-        answer1 = answerr(input('Enter your guess '))
-        if (answer1 == 0):
+        answer2 = answerr(name_two, input('Enter your guess '))
+        if (answer2 == 0):
             #print('Are you shure you want to quit? You will lose your bet ')
             print('\n'+name_two+', you left the game. Your points are', point_two, name_one+' points are', point_one)
             stop = restart(input('Do you want to start again?(Yes/No) '))
@@ -155,7 +156,7 @@ def game_two(point_one, point_two, name_one, name_two):
             else: return 0
 
       #sravnenie                
-        print('\n',dice_one,'...',dice_two,'  Outcome:',outcome, name_one+'\'s answer:',answer1, name_two+'\'s answer:', answer2)
+        print('\n',dice_one,'...',dice_two,'  Outcome:',outcome, '    '+name_one+'\'s answer:',answer1, '    '+name_two+'\'s answer:', answer2)
         if (answer1 == outcome):
             print('Congratulations, '+name_one+'! You win. +',bet1+bet2,' points.\nSorry, '+name_two+'. You lose.\n')
             point_one += bet1+bet2
@@ -179,7 +180,7 @@ def game_two(point_one, point_two, name_one, name_two):
             if(stop == 1): return 1
             else: return 0
                 
-        print('\n'+name_one+'\'s points: ', point_one,'\n'+name_two+'\'s points: ', point_two)
+        print(name_one+'\'s points: ', point_one,'\n'+name_two+'\'s points: ', point_two)
         
             
 ########################     НАЧАЛО ИГРЫ. ПРИВЕТСТВИЕ.     ########################################
