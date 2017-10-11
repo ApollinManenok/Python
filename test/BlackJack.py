@@ -1,13 +1,13 @@
-##############################################
-#                              IMPORT                  
-##############################################
+##################################################################################
+#                                   IMPORT                  
+##################################################################################
 
 from random import *
 
 
-##############################################
-#                           FUNCTIONS
-##############################################
+##################################################################################
+#                                 FUNCTIONS
+##################################################################################
 
 #           Proverka vvoda
 def checking (var):
@@ -49,20 +49,19 @@ def rules(etap):
 
 #          Join the game
 def join_the_game():
-    name = input('Enter your name, please  ')
+    name = input('\nEnter your name, please  ')
     while (True):
-        ans = input('Your name is '+name+', correctly?')
+        ans = input('\nYour name is '+name+', correctly?')
         if(yes_no(ans)):
-            #players.append(name)
-            money = checking(input('How much you want to bring in the game?  '))
+            money = checking(input('\nHow much you want to bring in the game?  '))
             while(type(money)!=int or money<5):
                 if (type(money) != int):
-                    menu = checking(input('Wrong enter. Try again. '))
+                    money = checking(input('\nWrong enter. Try again. '))
                 elif(money<1):
-                    money = checking(input('You need to bring in something. How much you are ready to bring in the game?  '))
+                    money = checking(input('\nYou need to bring in something. How much you are ready to bring in the game?  '))
                 else:
-                    if(yes_no(input(name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
-                        money = checking(input('How much you are ready to bring in the game?  '))
+                    if(yes_no(input('\n'+name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
+                        money = checking(input('\nHow much you are ready to bring in the game?  '))
                     else:
                         print('Well... No is no. ')
                         money = 0
@@ -70,38 +69,39 @@ def join_the_game():
             if (money == 0):
                 print('You can\'t join the game without money. Come back again later. ')
                 break
-            
+            ##players.append(name)
                     
                     
-            cash(name)
+            #cash(name)
             break
         else:
-            name = input('Enter your name again, please  ')
-    
+            name = input('\nEnter your name again, please  ')
+    #
 
     
 
 
-##############################################
-#                                MAIN
-##############################################
+##################################################################################
+#                                     MAIN
+##################################################################################
 players = list()
 money = dict()
 
 #bet ставка 
+while(True):
+    menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to exit game.\n\n'))
+    while(type(menu)!=int or ):
+    if(type(menu)!=int):
+        menu = checking(input('Wrong enter. Try again. '))
+    elif(menu == 1):
+        rules('main')
+    elif(menu == 2):
+        join_the_game()
+    elif(menu == 3):
+        print()
+    else:
+            print()
 
-menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to exit game.'))
-while(type(menu)!=int or menu>3 or menu<1):
-        if(type(menu)!=int):
-            menu = checking(input('Wrong enter. Try again. '))
-        elif(menu == 1):
-            rules('main')
-        elif(menu == 2):
-           join_the_game()
-        elif(menu == 3):
-            print()
-        else:
-            print()
 
 
 again = 'y'
