@@ -17,7 +17,7 @@ def checking (var):
     return var
 
 
-#
+#           Proverka otveta da-net
 def yes_no(answer):
     while(True):
         if(answer == 'Yes' or answer == 'Да' or answer == 'y' or answer == 'yes' or answer == 'Y'
@@ -37,17 +37,18 @@ def yes_no(answer):
             answer = input('Sorry, I don\'t understand. What would be your answer again?(Yes/No) ')
 
 
-#           Vyvod pravil
+'''#           Vyvod pravil
 def rules(etap):
     if (etap == 'main'):
         print('RULES: ')
-    elif (etap == ''):
-        print('')
+    elif (etap == ' '):
+        print(' ')
     else:
-        print()
+        print(' ')
 
 
 #          Join the game
+<<<<<<< HEAD
 def join_the_game():
     name = input('\nEnter your name, please  ')
     while (True):
@@ -62,10 +63,41 @@ def join_the_game():
                 else:
                     if(yes_no(input('\n'+name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
                         money = checking(input('\nHow much you are ready to bring in the game?  '))
+=======
+def join_the_game(players, money):
+    while (True):
+        name = input('\nEnter your name, please:  ')
+        if(name in money):
+            print('\nThis name already taken.  ')
+        else:
+            ans = input('\nYour name is '+name+', correctly? (Yes/No)  ')
+            if(yes_no(ans)):
+                cash = checking(input('\nHow much you want to bring in the game?  '))
+                while(type(cash)!=int or cash<5):
+                    if (type(cash) != int):
+                        cash = checking(input('\nWrong enter. Try again:  '))
+                    elif(cash<1):
+                        cash = checking(input('\nYou need to bring in something. How much you are ready to bring in the game?  '))
                     else:
-                        print('Well... No is no. ')
-                        money = 0
+                        if(yes_no(input('\n'+name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
+                            cash = checking(input('\nHow much you are ready to bring in the game?   '))
+                        else:
+                            print('\nWell... No is no.')
+                            cash = 0
+                            break
+                if (cash == 0):
+                    print('\nYou can\'t join the game without money. Come back again later. \n\n')
+                    break
+                if(yes_no(input('\nOkey. Lets check... Your name is '+name+' and you bring in '+str(cash)+' points, correctly? (Yes/No) '))):
+                    players.append(name)
+                    money[name] = cash
+                    print('\nNow you\'re in the game! Congratulations!\n')
+                    if(yes_no(input('\nDoes anyone else want to join? (Yes/No) '))):
+                        continue
+>>>>>>> origin/master
+                    else:
                         break
+<<<<<<< HEAD
             if (money == 0):
                 print('You can\'t join the game without money. Come back again later. ')
                 break
@@ -77,8 +109,33 @@ def join_the_game():
         else:
             name = input('\nEnter your name again, please  ')
     #
+=======
+                else:       
+                    continue
+            else:
+                print('\nTry again, please.   ')
+    return players, money
+>>>>>>> origin/master
 
-    
+
+#          Leave the game
+def leave_the_game(players, money):
+    while(True):
+        name = input('\nTell me who wan\'t to leave the game, please:  ')
+        if(name in money):
+            if(yes_no(input('\n'+name+' want to leave, correctly? (Yes/No)  '))):
+                players.pop(name)
+                money.pop(name)
+                if(yes_no(input('\nDoes anyone else want to leave? (Yes/No) '))):
+                    continue
+                else:
+                    break
+            else:
+                print('\nTry again, please.')
+        else:
+            print('\nThere is no such player.  ')
+    return players, money'''
+            
 
 
 ##################################################################################
@@ -88,6 +145,7 @@ players = list()
 money = dict()
 
 #bet ставка 
+<<<<<<< HEAD
 while(True):
     menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to exit game.\n\n'))
     while(type(menu)!=int or ):
@@ -101,9 +159,104 @@ while(True):
         print()
     else:
             print()
+=======
+
+>>>>>>> origin/master
+
+while(True):
+    menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to leave the game.\nPress 4 to start the game.\nPress 5 to exit game.\n\nEnter here:   '))
+    if(type(menu)!=int or menu > 5 or menu < 1):
+        print('\nWrong enter. Try again. ')
+    elif(menu == 1):
+        #rules('main')
+        print('RULES: ')
+    elif(menu == 2):
+        #players, money = join_the_game(players, money)
+        while (True):
+            if(len(players) > 7):
+                print('There are too much players already, you need to wait while someone leave the game. Sorry. \n')
+                break
+            else:
+                name = input('\nEnter your name, please:  ')
+                if(name in money):
+                    print('\nThis name already taken.  ')
+                else:
+                    ans = input('\nYour name is '+name+', correctly? (Yes/No)  ')
+                    if(yes_no(ans)):
+                        cash = checking(input('\nHow much you want to bring in the game?  '))
+                        while(type(cash)!=int or cash<5):
+                            if (type(cash) != int):
+                                cash = checking(input('\nWrong enter. Try again:  '))
+                            elif(cash<1):
+                                cash = checking(input('\nYou need to bring in something. How much you are ready to bring in the game?  '))
+                            else:
+                                if(yes_no(input('\n'+name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
+                                    cash = checking(input('\nHow much you are ready to bring in the game?   '))
+                                else:
+                                    print('\nWell... No is no.')
+                                    cash = 0
+                                    break
+                        if (cash == 0):
+                            print('\nYou can\'t join the game without money. Come back again later. \n\n')
+                            break
+                        if(yes_no(input('\nOkey. Lets check... Your name is '+name+' and you bring in '+str(cash)+' points, correctly? (Yes/No) '))):
+                            players.append(name)
+                            money[name] = cash
+                            print('\nNow you\'re in the game! Congratulations!\n')
+                            if(yes_no(input('\nDoes anyone else want to join? (Yes/No) '))):
+                                continue
+                            else:
+                                break
+                        else:       
+                            continue
+                    else:
+                        print('\nTry again, please.   ')
+    elif(menu == 3):
+        #players, money = leave_the_game(players, money)
+        while(True):
+            if(len(players) < 1):
+                print('There are no more players. \n')
+                break
+            else:
+                name = input('\nTell me who wan\'t to leave the game, please:  ')
+                if(name in money):
+                    if(yes_no(input('\n'+name+' want to leave, correctly? (Yes/No)  '))):
+                        players.pop(name)
+                        money.pop(name)
+                        if(yes_no(input('\nDoes anyone else want to leave? (Yes/No) '))):
+                            continue
+                        else:
+                            break
+                    else:
+                        print('\nTry again, please.')
+                else:
+                    print('\nThere is no such player.  ')
+    elif(menu == 4):
+        #game
+        while(True):
+            #print(len(players))
+            deck_amount = checking(input('Enter amount card decks (1 - 4)   '))
+            if (type(deck_amount) != int):
+                print('\nWrong enter\n')
+            elif(deck_amount > 4 or deck_amount < 1):
+                print('Can\'t use more than four decs or less than one ')
+            deck = [2,3,4,5,6,7,8,9,10,11]*4*deck_amount
+            shuffle(deck)
+            
+            
+            break
+    elif(menu == 5):
+        print('Good bye! Come back again. ')
+        break
 
 
+# Vybor kol-va kolod dl'a igry 1,2,4
 
+<<<<<<< HEAD
+
+=======
+"""
+>>>>>>> origin/master
 again = 'y'
 while(again == 'y'):
     koloda = [2,3,4,6,7,8,9,10,11]*4
@@ -173,3 +326,4 @@ while(again == 'y'):
     else:
         while(again!='y' and again!='n'):
             again = input('Something wrong.\n\nDo you want to play again? (y/n) ')
+"""
