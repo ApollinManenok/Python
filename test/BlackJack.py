@@ -1,13 +1,13 @@
-##################################################################################
-#                                   IMPORT                  
-##################################################################################
+############################################################################################
+#                                          IMPORT                  
+############################################################################################
 
 from random import *
 
 
-##################################################################################
-#                                 FUNCTIONS
-##################################################################################
+############################################################################################
+#                                       FUNCTIONS
+############################################################################################
 
 #           Proverka vvoda
 def checking (var):
@@ -45,25 +45,7 @@ def rules(etap):
         print(' ')
     else:
         print(' ')
-
-
 #          Join the game
-<<<<<<< HEAD
-def join_the_game():
-    name = input('\nEnter your name, please  ')
-    while (True):
-        ans = input('\nYour name is '+name+', correctly?')
-        if(yes_no(ans)):
-            money = checking(input('\nHow much you want to bring in the game?  '))
-            while(type(money)!=int or money<5):
-                if (type(money) != int):
-                    money = checking(input('\nWrong enter. Try again. '))
-                elif(money<1):
-                    money = checking(input('\nYou need to bring in something. How much you are ready to bring in the game?  '))
-                else:
-                    if(yes_no(input('\n'+name+'... Lets be honest, it\'s not enough to play.\nMaybe you have more? (Yes/No) '))):
-                        money = checking(input('\nHow much you are ready to bring in the game?  '))
-=======
 def join_the_game(players, money):
     while (True):
         name = input('\nEnter your name, please:  ')
@@ -94,30 +76,13 @@ def join_the_game(players, money):
                     print('\nNow you\'re in the game! Congratulations!\n')
                     if(yes_no(input('\nDoes anyone else want to join? (Yes/No) '))):
                         continue
->>>>>>> origin/master
                     else:
                         break
-<<<<<<< HEAD
-            if (money == 0):
-                print('You can\'t join the game without money. Come back again later. ')
-                break
-            ##players.append(name)
-                    
-                    
-            #cash(name)
-            break
-        else:
-            name = input('\nEnter your name again, please  ')
-    #
-=======
                 else:       
                     continue
             else:
                 print('\nTry again, please.   ')
     return players, money
->>>>>>> origin/master
-
-
 #          Leave the game
 def leave_the_game(players, money):
     while(True):
@@ -138,30 +103,15 @@ def leave_the_game(players, money):
             
 
 
-##################################################################################
-#                                     MAIN
-##################################################################################
+############################################################################################
+#                                         MAIN
+############################################################################################
 players = list()
 money = dict()
-
+bets = dict()
+player_cards = dict()
 #bet ставка 
-<<<<<<< HEAD
-while(True):
-    menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to exit game.\n\n'))
-    while(type(menu)!=int or ):
-    if(type(menu)!=int):
-        menu = checking(input('Wrong enter. Try again. '))
-    elif(menu == 1):
-        rules('main')
-    elif(menu == 2):
-        join_the_game()
-    elif(menu == 3):
-        print()
-    else:
-            print()
-=======
 
->>>>>>> origin/master
 
 while(True):
     menu = checking(input ('WELCOME to BLACKJACK GAME!\n\nMenu:\nPress 1 to read RULES.\nPress 2 to join the game.\nPress 3 to leave the game.\nPress 4 to start the game.\nPress 5 to exit game.\n\nEnter here:   '))
@@ -169,7 +119,7 @@ while(True):
         print('\nWrong enter. Try again. ')
     elif(menu == 1):
         #rules('main')
-        print('RULES: ')
+        print('RULES: In the game four decks. After the bets have been made, the dealer deals two cards to each player and two cards to himself. Once the bid has been placed, it cannot be cancelled or retracted')
     elif(menu == 2):
         #players, money = join_the_game(players, money)
         while (True):
@@ -235,28 +185,75 @@ while(True):
         #game
         while(True):
             #print(len(players))
-            deck_amount = checking(input('Enter amount card decks (1 - 4)   '))
+            deck_amount = checking(input('\nEnter amount card decks (1 - 4)   '))
             if (type(deck_amount) != int):
                 print('\nWrong enter\n')
+                continue
             elif(deck_amount > 4 or deck_amount < 1):
-                print('Can\'t use more than four decs or less than one ')
-            deck = [2,3,4,5,6,7,8,9,10,11]*4*deck_amount
+                print('Can\'t use more than four decks or less than one ')
+                continue
+            deck = [2,3,4,5,6,7,8,9,10,10,10,10,11]*4*deck_amount
             shuffle(deck)
+            print('\n\nPlace your bets, ladies and gentlemen!')
+
+            for player in players: #### stavki igrokov
+                while(True):
+                    bet = checking(input('\n'+player+', your bet is '))
+                    if(type(bet) != int):
+                        print('\nYou entered not a number, please, check your answer.')
+                    elif(bet < 1):
+                        print('\nYour bet can\'t be less than one.')
+                    elif(bet > money[player]):
+                        print('\nYou don\'t have that much. Your points are',money[player])
+                    else:
+                        if(yes_no(input(player+', your bet is '+str(bet)+', correctly? (Yes/No) '))):
+                            print('\n\n')
+                            bets[player] = bet
+                            break
+                        else:
+                            print('\nThen we should check again\n')
+                            continue
+            print('Bets are made, no more bets.\n\n"After the bets have been made, the dealer deals two cards\nto each player and two cards to himself."\n\n')
+
+            for player in players: #### karty igrokov
+                hand = list()
+                hand.append(deck.pop())
+                hand.append(deck.pop())
+                player_cards[player] = hand
+            dealer_cards = list()
+            dealer_cards.append(deck.pop())
+            dealer_cards.append(deck.pop())
+
+            for player in players: #### dobor kart
+                while(True):
+                    print('\n'+player+', your cards are: ', end = ' ')
+                    for card in player_cards[player]:
+                        print(card, end = ' ')
+                    if(yes_no(input('Your score is '+str(sum(player_cards[player]))+' Do you need more? (Yes/No)'))):
+                        print(player_cards[player].append(deck.pop()))
+                        print(player_cards[player][])
+                        if(sum(player_cards[player])> 21):
+                            money[player] -= bets[player]
+                            print('Your score bigger than 21. You lose your bet',bets[player],'\n\nNow your points are',money[player])
+                            if (money[player]<1):
+                                if(yes_no(input('Can you bring in something to continue the game? (Yes/No)'))):
+                                    #
+                                else:
+                                    players.pop(player)
+                                    money.pop(player)
+                                    player_cards.pop(player)
+                                    bets.pop(player)
+                    else:
+                        break
             
-            
-            break
     elif(menu == 5):
         print('Good bye! Come back again. ')
         break
 
 
-# Vybor kol-va kolod dl'a igry 1,2,4
+# Vybor kol-va kolod dl'a igry 1 - 4
 
-<<<<<<< HEAD
-
-=======
 """
->>>>>>> origin/master
 again = 'y'
 while(again == 'y'):
     koloda = [2,3,4,6,7,8,9,10,11]*4
