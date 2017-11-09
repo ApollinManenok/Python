@@ -1,0 +1,6 @@
+'author_list', (0, 6)
+'auth_obj', (512, 6)
+'publish_list', (1024, 6)
+'publish_obj', (1536, 6)
+'book_list', (2048, 6)
+'book_obj', (2560, 6)
