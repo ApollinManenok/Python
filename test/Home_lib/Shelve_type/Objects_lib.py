@@ -9,16 +9,16 @@ class Author():
         
 
 class Book():
-    def __init__(self, title, author = None, publish = None, comment = None):
-        book_list.append(title)
+    def __init__(self, title, series, author, publisher, pages, comment):
         self.title = title
+        self.series = series
         self.comment = comment
-        if not(author in author_list):            
-            auth_obj[author] = Author(author)
-        self.author = auth_obj[author]
-        if not(publish in publish_list):
-            publish_obj[publish] = Publisher(publish)
-        self.publish = publish_obj[publish]
+        self.author = author
+        self.publisher = publisher
+        if not(pages == ''):
+            self.pages = int(pages)
+        else:
+            self.pages = 0
 
 
 class Publisher():
